@@ -1,0 +1,75 @@
+%% -----------------------------------------------------------------------------
+%% MIT License
+%%
+%% Copyright 2025 ThirtySomething
+%%
+%% Permission is hereby granted, free of charge, to any person obtaining a
+%% copy of this software and associated documentation files (the "Software"),
+%% to deal in the Software without restriction, including without limitation
+%% the rights to use, copy, modify, merge, publish, distribute, sublicense,
+%% and/or sell copies of the Software, and to permit persons to whom the
+%% Software is furnished to do so, subject to the following conditions:
+%%
+%% The above copyright notice and this permission notice shall be included
+%% in all copies or substantial portions of the Software.
+%%
+%% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+%% OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+%% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+%% THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+%% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+%% FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+%% DEALINGS IN THE SOFTWARE.
+%% -----------------------------------------------------------------------------
+
+%% -----------------------------------------------------------------------------
+%% Definition of terms
+%% -----------------------------------------------------------------------------
+
+\section{Datenbestände}
+
+In diesem Abschnitt sollen die verschiedenen Arten der Datenbestände näher
+beschrieben sowie voneinander abgegrenzt werden.
+
+\subsection{Aktiver Datenbestand}
+
+Unter einem aktiven Datenbestand versteht man die Daten, auf die jederzeit
+ohne weiteres zugegriffen werden kann. Konkret geht es um die Dokumente, die
+lokal auf einem Computer gesichert sind. Sobald man dem Computer arbeitet,
+kann man aktiv auf diese Daten zugreifen.
+
+\subsection{Passiver Datenbestand}
+
+Im Gegensatz zum aktiven Datenbestand können auf Daten in einem passiven
+Datenbestand nur indirekt zugegriffen werden. Beispielsweise müssen diese
+Daten zuerst von einem Backupmedium wie einer externen Festplatte oder einem
+Magnetband zuerst auf den Computer übertragen werden. Damit werden sie aus
+dem passiven Datenbestand in den aktiven Datenbestand überführt.
+
+\subsection{Backup}
+
+Durch ein Backup wird eine Kopie des aktiven Datenbestandes auf einem externen
+Speichermedium erstellt. Damit wurde der aktive Datenbestand des lokalen
+Computers in einen passiven Datenbestand auf dem Backupmedium überführt.
+
+\subsection{Synchronisation}
+
+Bei der Synchronisation wird der aktive Datenbestand auf mehrere Geräte
+erweitert. Konkret bedeutet das, dass die Daten von einem lokalen Computer auf
+ein weiteres Gerät übertragen werden. Im Unterschied zum Backup kann aber
+jederzeit auf dem weiteren Gerät ebenfalls auf die Daten zugegriffen werden
+oder aber auch Änderungen vorgenommen werden. Die Daten werden nach der Änderung
+synchronisiert und stehen dann auf allen Geräten mit dem gleichen Inhalt zur
+Verfügung.
+\bigskip
+
+\tsTextBold{ACHTUNG:} Sollte ein und dasselbe Dokument auf mehreren Geräten
+gleichzeitig geändert werden, kann es zu Konflikten kommen. Eine inhaltliche
+Synchronisation der Daten ist nur mit besonderer kollaborativer Software
+möglich!
+
+\subsection{Versionierung}
+
+Die Versionierung ist eine Form des Backups. Werden Änderungen an einem Dokument
+durchgeführt, wird das alte Dokument zuerst als Version X gespeichert, bevor es
+durch die aktuelle Version ersetzt wird.

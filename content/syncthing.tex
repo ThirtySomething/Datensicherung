@@ -1,0 +1,75 @@
+%% -----------------------------------------------------------------------------
+%% MIT License
+%%
+%% Copyright 2025 ThirtySomething
+%%
+%% Permission is hereby granted, free of charge, to any person obtaining a
+%% copy of this software and associated documentation files (the "Software"),
+%% to deal in the Software without restriction, including without limitation
+%% the rights to use, copy, modify, merge, publish, distribute, sublicense,
+%% and/or sell copies of the Software, and to permit persons to whom the
+%% Software is furnished to do so, subject to the following conditions:
+%%
+%% The above copyright notice and this permission notice shall be included
+%% in all copies or substantial portions of the Software.
+%%
+%% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+%% OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+%% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+%% THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+%% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+%% FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+%% DEALINGS IN THE SOFTWARE.
+%% -----------------------------------------------------------------------------
+
+%% -----------------------------------------------------------------------------
+%% About Syncthing
+%% -----------------------------------------------------------------------------
+
+\section{Syncthing}
+
+Das Programm \href{https://syncthing.net/}{Syncthing} ist eine Software, die
+Daten zwischen verschiedenen Computern synchronisiert und je nach Konfiguration
+auch noch versioniert. Für den Zweck der Dateisynchronisation
+(Just-In-Time-Backup) mit Versionierung ist es die sprichwörtliche
+\tsTextQuoteG{Eierlegende Wollmilchsau}.
+\bigskip
+
+Ein Weiteres Argument für die Software ist, dass sie als
+\href{https://de.wikipedia.org/wiki/Open_Source}{Open Source}
+zur Verfügung steht. Der Quellcode des Programmes ist öffentlich verfügbar,
+kann jederzeit eingesehen werden, von jedem für seinen eigenen Zweck angepasst
+werden und vieles mehr. Entscheidend sind jedoch zwei ganz wichtige Punkte:
+Zum einen verhindert die öffentliche Verfügbarkeit des Quellcodes versteckte
+Hintertüren, durch die jemand unbefugten Zugriff auf die Daten haben könnte.
+Zum anderen entstehen zunächst einmal keine Kosten. Die Software kann kostenfrei
+eingesetzt werden. Mögliche Kosten, die ein Dienstleister für die Einrichtung
+der Software berechnet, sind hiervon ausgenommen.
+\bigskip
+
+Auf den folgenden Seiten wird ein Konzept vorgestellt, mit dem eine relativ
+verlässliche Datensicherung erfolgen kann. Relativ verlässlich deswegen, denn
+eine 100\%ige Sicherheit kann niemand gewährleisten. Das Konzept berücksichtigt
+die bereits angesprochenen Punkte hinsichtlich der Redundanzen und der
+Versionierung -- damit sollte ein hoher Grad an Datenverfügbarkeit gesichert
+sein.
+\bigskip
+
+Die für dieses Konzept relevanten Funktionen von \gls{syncthing} sind:
+\begin{itemize}
+    \item Dateisynchronisation
+    \item Dateiversionierung
+\end{itemize}
+
+\tsTextBold{Hinweis:} Das Programm \gls{syncthing} läuft auf einem Windows PC
+primär im Hintergrund. Das bedeudet, dass sich nach der Einrichtung des Programmes
+für den Anwender nichts ändert. Aber es ist für den Anwender auch nichts
+sichtbar. Ergänzend dazu gibt es das Programm \gls{syncthingtray} -- ein
+diskreter Aktivitätsindikator für \gls{syncthing}.
+\bigskip
+
+\tsTextBold{Anmerkung:} Da es sich bei Syncthing um ein Projekt aus dem
+\href{https://de.wikipedia.org/wiki/Open_Source}{Open Source} Bereich handelt,
+wird die Entwicklung der Software von freiwilligen kostenfrei durchgeführt.
+Sollte das Konzept umgesetzt werden -- eine Spende für das Projekt wäre eine
+tolle Geste.

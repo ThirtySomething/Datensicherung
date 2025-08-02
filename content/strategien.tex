@@ -1,0 +1,100 @@
+%% -----------------------------------------------------------------------------
+%% MIT License
+%%
+%% Copyright 2025 ThirtySomething
+%%
+%% Permission is hereby granted, free of charge, to any person obtaining a
+%% copy of this software and associated documentation files (the "Software"),
+%% to deal in the Software without restriction, including without limitation
+%% the rights to use, copy, modify, merge, publish, distribute, sublicense,
+%% and/or sell copies of the Software, and to permit persons to whom the
+%% Software is furnished to do so, subject to the following conditions:
+%%
+%% The above copyright notice and this permission notice shall be included
+%% in all copies or substantial portions of the Software.
+%%
+%% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+%% OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+%% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+%% THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+%% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+%% FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+%% DEALINGS IN THE SOFTWARE.
+%% -----------------------------------------------------------------------------
+
+%% -----------------------------------------------------------------------------
+%% Backup strategies
+%% -----------------------------------------------------------------------------
+
+\section{Strategien}
+
+Ein Backup soll einem Datenverlust vorbeugen. Hierfür sind verschiedene
+Strategien und Vorkehrungen zu treffen, um im Fall der Fälle wieder einen
+Zugriff auf die digitalen Daten zu haben. Hierfür gibt es verschiedene
+Möglichkeiten, die entsprechend bewertet werden müssen und in die Backupstrategie
+einfliessen sollten.
+
+\subsection{Technische Redundanz}
+
+Solange die Daten nur auf einer einzelnen \gls{festplatte} gespeichert werden,
+besteht das Risiko eines 100\%igen Datenverlustes, wenn diese \gls{festplatte}
+durch einen technischen Defekt ihre Funktionalität verliert und auf die Daten
+nicht mehr zugegriffen werden können.
+\bigskip
+
+In der IT wurde dieses Problem bereits Mitte/Ende der 1980er Jahre erkannt. Um
+einem 100\%igen Datenverlust vorzubeugen, hatte man die Idee, mehrere
+\gls{festplatte}n in einem Verbund zu betreiben, einem sogenannten \gls{raid}.
+Hier sorgt also eine spezielle Hardware bzw. eine spezielle Software im
+Betriebssystem dafür, dass die Daten redundant vorliegen. Sollte also eine der
+\gls{festplatte}n im Verbund ausfallen, entsteht kein Datenverlust.
+
+\subsection{Logische Redundanz}
+
+Trotz einer technischen Redundanz kann ein 100\%iger Datenverlust erfolgen,
+wenn das Gerät mit dem \gls{raid} physisch zerstört wird. Das kann zum Beispiel
+die Folge von einem Brand oder einem Erdbeben sein. Daher ist es die logische
+Konsequenz, die Daten an verschiedenen Orten gleichzeitig vorzuhalten. Früher
+hatte man die Bänder/\gls{festplatte}n der Datensicherung nach dem Backup an
+einem weiteren Ort gelagert. Heute kann man die Daten über das Internet bequem
+auf einem/mehreren weiteren System(en) speichern.
+
+\subsection{Generationenprinzip}
+
+Bei den bisher angerissenen Strategien ging es nur um die aktuellen Daten, die
+Just-In-Time redundant, unter Umständen auch über das Internet, vorlagen. Was
+aber, wenn ein Dokument versehentlich gelöscht wurde? Und was, wenn diese
+Löschung erst nach mehreren Tagen bemerkt wird? Mit den bisherigen Strategien
+wäre trotz aller Vorsichtsmaßnahmen ein Datenverlust entstanden. Daraus ergeben
+sich zwei wichtige Lehren für die Zukunft:
+
+\begin{itemize}
+    \item [1.] Ein \gls{raid} ist keine Datensicherung!
+    \item [2.] Eine logische Redundanz schliesst einen Datenverlust nicht aus!
+\end{itemize}
+
+Eine Lösung hierfür ist das \gls{generationenprinzip}. Früher wurde eine
+Generation durch den Wechsel des Datensicherungsmediums angelegt. Im Regelfall
+hatte man dann drei Generationen, nämlich \tsTextQuoteG{Großvater},
+\tsTextQuoteG{Vater} und \tsTextQuoteG{Sohn}. Dabei wurde die jeweils älteste
+Generation überschrieben, und die anderen zwei Genreationen \tsTextQuoteG{rückten
+    nach}.
+\bigskip
+
+Dadurch, dass der Backup Prozess längere Zeit in Anspruch nahm, wurde dies in
+den späten Abendstunden bzw. Nachts durchgeführt. Hierbei ergab sich eine Art
+von Lücke in der Datensicherung: Alles, was zum Zeitpunkt der Sicherung nicht
+gespeichert war, ging verloren. Wenn also tagsüber ein Dokument angelegt und
+vor der Datensicherung wieder gelöscht wurde, so hat man von diesem Dokument
+keine Sicherung.
+
+\subsection{Versionierung}
+
+Um die letzte Lücke in der Datensicherung zu schliessen, verwendet man eine
+sogenannte \gls{versionsverwaltung}. Diese merkt sich das Dokument und seinen
+Werdegang. Sobald das Dokument zum ersten Mal gespeichert wurde, hat es die
+initiale Version. Jede Änderung (und Speicherung!) an dem Dokument führt zu
+einer nächsten Version. Das Löschen des Dokumentes führt zur letzten Version --
+nicht mehr vorhanden. In der Versionisverwaltung ist das Dokument jedoch von
+der initialen Version über die Zwischenversionen bis zur letzten Version noch
+vorhanden.

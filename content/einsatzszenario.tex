@@ -1,0 +1,212 @@
+%% -----------------------------------------------------------------------------
+%% MIT License
+%%
+%% Copyright 2025 ThirtySomething
+%%
+%% Permission is hereby granted, free of charge, to any person obtaining a
+%% copy of this software and associated documentation files (the "Software"),
+%% to deal in the Software without restriction, including without limitation
+%% the rights to use, copy, modify, merge, publish, distribute, sublicense,
+%% and/or sell copies of the Software, and to permit persons to whom the
+%% Software is furnished to do so, subject to the following conditions:
+%%
+%% The above copyright notice and this permission notice shall be included
+%% in all copies or substantial portions of the Software.
+%%
+%% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+%% OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+%% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+%% THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+%% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+%% FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+%% DEALINGS IN THE SOFTWARE.
+%% -----------------------------------------------------------------------------
+
+%% -----------------------------------------------------------------------------
+%% Scenario I for the usage of Syncthing
+%% -----------------------------------------------------------------------------
+
+\section{Einsatzszenario}
+
+Nehmen wir einmal an, dass in einer kleinen Firma eine Bürofrachkraft die
+Korrespondenz erledigt. Dabei werden täglich mehrere, unter Umständen dutzende
+Schriftstücke erstellt. Bedingt durch die Größe der Firma gibt es keinen
+Server, auf dem die Daten zentral abgelegt werden. Stattdessen findet eine
+sogenannte lokale Speicherung auf dem Bürocomputer der Fachkraft statt.
+
+\subsection{Technische Redundanz Büro}
+
+\subsubsection{Voraussetzungen}
+
+Bevor mit der Einrichtung von \gls{syncthing} begonnen werden kann, sollte
+vom Bürocomputer eine Datensicherung der Dokumente auf die externe USB
+Festplatte erfolgen.
+
+\subsubsection{Einrichtung NAS Büro}
+
+Zunächst wird die \gls{ds124} im Büro vorbereitet und \gls{syncthing}
+installiert. Eine Anleitung dazu ist
+\href{https://github.com/ThirtySomething/NAS-Information}{hier}
+zu finden. Bitte darauf achten, dass der Container
+
+\begin{itemize}
+    \item Automatisch gestartet wird.
+    \item Mindestens beim Speicher limitiert wird; bei der \gls{ds124} werden
+          512MB empfohlen.
+\end{itemize}
+
+Sollten diese Punkte nicht umgesetzt werden, ist das ganze Konzept nichtig.
+Unter Umständen würde vom Betriebssystem des \gls{nas} der \gls{docker}
+Container von \gls{syncthing} beendet werden, weil er zu viel Speicher benötigt.
+Ohne die Autostart-Option würde er nicht mehr gestartet werden -- und damit
+würde die Idee der technischen Redundanz nicht mehr funktionieren.
+
+\subsubsection{Einrichtung PC Büro}
+
+Auf dem Bürocomputer der Fachkraft wird \gls{syncthing} installiert. Sofern
+eine Anzeige gewünscht wird, kann optional \gls{syncthingtray}
+installiert werden. Das erleichtert die visuelle Kontrolle über den Prozess.
+\bigskip
+
+Im nächsten Schritt müssen die \gls{syncthing} Instanzen des Bürocomputers und
+der \gls{ds124} miteinander bekannt gemacht werden. Das ist auf der
+\href{https://docs.syncthing.net/intro/getting-started.html}{Seite} des
+Projektes beschrieben. Die Oberfläche dazu ruft man mit
+\href{http://localhost:8384/}{http://localhost:8384/} im Browser auf. Unter
+Umständen funktioniert diese URL nicht direkt. Das kann daran liegen, dass bei
+der Installation ein Sicherheitszertifikat installiert wurde. Dann ist die
+Konfigurationsseite über \href{https://localhost:8384/}{https://localhost:8384/}
+zu erreichen. \tsTextBold{Hinweis:} Unter Umständen muss im Browser erst eine
+Sicherheitswarnung akzeptiert werden, da das Sicherheitszertifikat während
+der Installation erzeugt wurde und dem Broswer nicht bekannt ist.
+\bigskip
+
+Danach werden einer oder mehere Ordner auf dem Bürocomputer ausgewählt und in
+Syncthing aufgenommen. Auch hier ist die Oberfläche im Browser hilfreich. Es
+können alle Ordner auf dem Bürocomputer ausgewählt werden. Eventuell macht es
+Sinn, hier eine neue Ordnerstruktur anzulegen/definieren, und dann nach und
+nach die originalen Dokumente dorthin zu verschieben.
+\bigskip
+
+Nachdem auf dem Bürocomputer die zu synchronisierenden Ordner definiert wurden,
+müssen diese nur noch mit der \gls{syncthing} Instanz auf dem \gls{nas}
+geteilt werden.
+
+\tsImage{images/es_001a.png}{Technische Redundanz Büro}{width=0.9\textwidth}
+
+Über die Oberfläche des \gls{nas} im Büro akzeptiert man den eingehenden
+Ordner des Büro PCs. Damit ist die Einrichtung der technische Redundanz
+im Büro abgeschlossen.
+\bigskip
+
+\tsTextBold{Hinweis:} Je nach Anzahl Dokumente sowie deren Umfang kann der
+initiale Abgleich etwas längere Zeit in Anspruch nehmen.
+\bigskip
+
+\tsTextBold{Anmerkung:} Der aktive Datenbestand ist nun auf dem Bürocomputer
+und dem \gls{nas} redundant vorhanden.
+
+\subsection{Stufe 2: Versionierung}
+\label{sec:Stufe 2: Versionierung}
+
+Die Versionierung ist eine Eigenschaft der Ordner, die mit \gls{syncthing}
+geteilte wurde. Diese Eigenschaft ist auf dem Gerät zu aktivieren und
+einzustellen, auf dem die Versionierung gewünscht ist.
+\bigskip
+
+Die Versionierung soll auf dem \gls{nas} aktiviert werden. Dazu ruft man auf dem
+\gls{nas} die Oberfläche von \gls{syncthing} über die IP Adresse des \gls{nas}
+mit dem Port 8384 auf: \href{http://IP-DES-NAS:8384/}{http://IP-DES-NAS:8384/}
+bzw. \href{https://IP-DES-NAS:8384/}{https://IP-DES-NAS:8384/}.
+\bigskip
+
+Hier kann man den Ordner in der Liste links auswählen. Durck einen Mausklick
+werden die Details dazu eingeblendet, einschließlich verschiedener
+Aktionsbuttons im unteren Bereich. Der notwendige Dialog, um die Versionierung
+zu aktivieren und zu konfigurieren, wird über den Bearbeiten bzw. Edit Button
+aufgerufen.
+\bigskip
+
+Im Dialog wird Versionierung bzw. Versioning ausgewählt.
+
+\tsImage{images/versioning.png}{Versionierungseinstellungen}{width=0.9\textwidth}
+
+In dem abgebildeten Beispiel ist die Versionierung aktiv, es werden maximal
+drei Versionen einer Datei vorgehalten. Dies würde dem \gls{generationenprinzip}
+entsprechen.
+\bigskip
+
+In der \href{https://docs.syncthing.net/v1.29.7/users/versioning}{Hilfe} von
+\gls{syncthing} wird näher auf die Versionierung eingegangen. Sollten andere
+Einstellungen gewünscht sein, bitte hier genau nachlesen, was die einzelnen
+Versionierungsarten bedeuten.
+
+\tsImage{images/es_001b.png}{Versionierung}{width=0.9\textwidth}
+
+Damit ist die Einrichtung des Versionierung abgeschlossen.
+\bigskip
+
+\tsTextBold{Anmerkung:} Der aktive Datenbestand auf dem \gls{nas} wird durch
+das Programm \gls{syncthing} nicht nur synchronisiert, sondern durch die
+Versionierung auch noch in einen passiven Datenbestand überführt.
+
+\subsection{Stufe 3: Logische Redundanz}
+
+Für die logische Redundanz wird ein zweites \gls{nas} an einem anderen
+physischen Ort benötigt. Der Einfachkeit halber nehmen wir an, dass dies bei
+dem Firmeninhaber \tsTextQuoteG{Zuhause} sein wird.
+\bigskip
+
+Das zweite \gls{nas} \tsTextQuoteG{Zuhause} wird analog dem ersten \gls{nas} im
+Büro eingerichtet. Dies betrifft sowohl die statische IP Adresse als auch den
+\gls{docker} Container von \gls{syncthing}.
+\bigskip
+
+Für die logische Redundanz müssen die \gls{syncthing} Instanzen der \gls{nas}
+Systeme miteinander bekannt gemacht werden. Das geschieht analog wie bei
+den \gls{syncthing} Instanzen des Büro Computers und des \gls{nas} im Büro.
+\bigskip
+
+Im letzten Schritt müssen nun die Daten von dem \gls{nas} im Büro auf das
+\gls{nas} \tsTextQuoteG{Zuhause} übertragen werden. Dazu geht man ähnlich vor
+wie bei der Einstellung der Versionierung. Auf dem \gls{nas} im Büro wählt man
+den Reiter Teilen/Share aus. Hier aktiviert man lediglich das Auswahlkästchen
+für das \gls{nas} \tsTextQuoteG{Zuhause}. Über die Oberfläche des \gls{nas}
+\tsTextQuoteG{Zuhause} akzeptiert man den eingehenden Ordner von dem \gls{nas}
+Büro.
+
+\tsImage{images/es_001c.png}{Logische Redundanz}{width=0.9\textwidth}
+
+Soll die Versionierung auch für das \gls{nas} \tsTextQuoteG{Zuhause} gelten,
+ist diese auf dem Gerät analog zu \nameref{sec:Stufe 2: Versionierung}
+einzurichten. Damit ist die Einrichtung der logsichen Redundanz abgeschlossen.
+\bigskip
+
+\tsTextBold{Hinweis:} Je nach Anzahl Dokumente sowie deren Umfang kann der
+initiale Abgleich etwas längere Zeit in Anspruch nehmen.
+
+\subsection{Stufe 4: Technische Redundanz Zuhause (optional)}
+
+Möchte der Geschäftsinhaber die Möglichkeit haben, auch zuhause an Dokumenten
+zu Arbeiten und diese komfortabel auf dem Büro PC verfügbar haben, kann optional
+noch eine Technische Redundanz zwischen dem \gls{nas} \tsTextQuoteG{Zuhause}
+und einem PC \tsTextQuoteG{Zuhause} eingerichtet werden.
+\bigskip
+
+Dazu installiert man die Programme \gls{syncthing} und \gls{syncthingtray}
+auf dem PC \tsTextQuoteG{Zuhause}. Dann macht man die \gls{syncthing} Instanzen
+des \gls{nas} \tsTextQuoteG{Zuhause} und PC \tsTextQuoteG{Zuhause} miteinander
+bekannt. Im letzten Schritt teilt man den Ordner von dem \gls{nas}
+\tsTextQuoteG{Zuhause} mit dem PC \tsTextQuoteG{Zuhause}. Bei der Annahme des
+geteilten Ordners ist darauf zu achten, dass der Zielordner, also der Platz,
+an dem die Daten abgelegt werden, entsprechend den Wünschen/Vorlieben ausgewählt
+wird. \tsTextBold{Hinweis:} Je nach Auswahl des Zielordners ist unter Umständen
+ein vorheriges Backup auf einer USB Festplatte angebracht.
+
+\tsImage{images/es_001d.png}{Technische Redundanz Zuhause}{width=0.9\textwidth}
+
+Damit ist die technische Redundanz \tsTextQuoteG{Zuhause} eingerichtet.
+\bigskip
+
+\tsTextBold{Hinweis:} Je nach Anzahl Dokumente sowie deren Umfang kann der
+initiale Abgleich etwas längere Zeit in Anspruch nehmen.

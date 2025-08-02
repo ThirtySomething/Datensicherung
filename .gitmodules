@@ -1,0 +1,3 @@
+[submodule "vendor/LatexTemplate"]
+	path = vendor/LatexTemplate
+	url = https://github.com/ThirtySomething/LatexTemplate
